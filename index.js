@@ -3,6 +3,8 @@ const { json } = require('express/lib/response');
 const app = express();
 
 app.use(express.json());
+app.use(middleware);
+app.use(logger);
 
 let courses = [
     { id: 1, name: 'course1' },
@@ -49,7 +51,17 @@ app.delete('/courses/:id', (req, res) => {
 });
 
 
+function middleware(req, res, next) {
+    console.log('Logging...');
+    next();
+}
 
+
+// need to log method, ip, hostname, date
+function logger (req, res, next) {
+    console.log(req.method, req.ip, req.hostname, new Date());
+    next();
+}
 
 
 
