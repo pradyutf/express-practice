@@ -24,11 +24,21 @@ app.post('/courses', (req, res) => {
         name: req.body.name
     };
     courses.push(course);
-    res.json(course);
+    res.json(courses);
 
     // console.log(req.body);
     // res.send('received');
 });
+
+app.put('/courses/:id', (req, res) => {
+    const course = courses.find(c => c.id === parseInt(req.params.id));
+    if (!course) return res.status(404).send('The course with the given ID was not found.');
+
+    course.name = req.body.name;
+    res.json(courses);
+});
+
+
 
 
 
