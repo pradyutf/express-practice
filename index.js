@@ -59,7 +59,7 @@ function middleware(req, res, next) {
 
 // need to log method, ip, hostname, date
 function logger (req, res, next) {
-    console.log(req.method, req.ip, req.hostname, new Date());
+    console.log(req.method, req.ip, req.headers.host , new Date());
     next();
 }
 
